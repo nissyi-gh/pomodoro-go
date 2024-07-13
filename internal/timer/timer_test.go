@@ -28,3 +28,19 @@ func TestTimer_Start(t *testing.T) {
 		t.Errorf("Expected elapsed time to be at least %v, got %v", duration, elapsedTime)
 	}
 }
+
+func TestTimer_Stop(t *testing.T) {
+	duration := 5 * time.Millisecond
+	timer := NewTimer(duration)
+
+	timer.Start()
+	time.Sleep(2 * time.Millisecond)
+	timer.Stop()
+
+	select {
+	case <-timer.Done():
+		t.Error("Timer should not have finished")
+	case <-time.After(4 * time.Millisecond):
+		// Test passed.
+	}
+}

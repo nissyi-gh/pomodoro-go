@@ -36,3 +36,9 @@ func (t *Timer) Start() {
 func (t *Timer) Done() <-chan bool {
 	return t.done
 }
+
+func (t *Timer) Stop() {
+	if t.ticker != nil {
+		t.ticker.Stop()
+	}
+}
