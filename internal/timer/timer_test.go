@@ -44,3 +44,17 @@ func TestTimer_Stop(t *testing.T) {
 		// Test passed.
 	}
 }
+
+func TestTimer_Done(t *testing.T) {
+	duration := 1 * time.Second
+	timer := NewTimer(duration)
+
+	timer.Start()
+
+	select {
+	case <-timer.Done():
+		// Test passed.
+	case <-time.After(2 * time.Second):
+		t.Error("Timer did not finish within the expected time")
+	}
+}
