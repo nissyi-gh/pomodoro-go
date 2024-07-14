@@ -9,7 +9,7 @@ func TestNewPomodoro(t *testing.T) {
 	workDuration := 25 * time.Minute
 	shortBreak := 5 * time.Minute
 	longBreak := 15 * time.Minute
-	session :=4
+	session := 4
 	pomodoro := NewPomodoro(workDuration, shortBreak, longBreak, session)
 
 	if pomodoro.workDuration != workDuration {

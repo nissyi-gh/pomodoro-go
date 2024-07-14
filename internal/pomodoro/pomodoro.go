@@ -15,7 +15,6 @@ type Pomodoro struct {
 	timer          *timer.Timer
 }
 
-
 func NewPomodoro(workDuration, shortBreak, longBreak time.Duration, sessions int) *Pomodoro {
 	return &Pomodoro{
 		workDuration:   workDuration,
