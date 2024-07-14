@@ -29,8 +29,10 @@ func (p *Pomodoro) Start() {
 	p.currentSession++
 
 	if p.currentSession <= p.sessions {
+		fmt.Printf("Starting session %d\n", p.currentSession)
 		p.timer = timer.NewTimer(p.workDuration)
 	} else {
+		fmt.Println("Taking a long break...")
 		p.timer = timer.NewTimer(p.longBreak)
 		p.currentSession = 0
 	}
@@ -39,9 +41,11 @@ func (p *Pomodoro) Start() {
 
 func (p *Pomodoro) NextSession() {
 	if p.currentSession == p.sessions {
+		fmt.Println("Taking a long break...")
 		p.timer = timer.NewTimer(p.longBreak)
 		p.currentSession = 0
 	} else {
+		fmt.Println("Taking a short break...")
 		p.timer = timer.NewTimer(p.shortBreak)
 		p.currentSession++
 	}
