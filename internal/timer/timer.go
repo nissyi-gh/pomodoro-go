@@ -4,6 +4,7 @@ import "time"
 
 type Timer struct {
 	duration time.Duration
+	startTime time.Time
 	ticker   *time.Ticker
 	done     chan bool
 }
@@ -16,6 +17,7 @@ func NewTimer(duration time.Duration) *Timer {
 }
 
 func (t *Timer) Start() {
+	t.startTime = time.Now()
 	t.ticker = time.NewTicker(time.Second)
 	remaining := t.duration
 
@@ -40,5 +42,14 @@ func (t *Timer) Done() <-chan bool {
 func (t *Timer) Stop() {
 	if t.ticker != nil {
 		t.ticker.Stop()
+	}
+}
+
+func (t *Timer) TimeLeft() time.Duration {
+	elapsed := time.Since(t.startTime)
+	if elapsed >= t.duration {
+		return 0
+	} else {
+		return t.duration - elapsed
 	}
 }
