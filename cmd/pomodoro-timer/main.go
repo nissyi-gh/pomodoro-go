@@ -17,16 +17,16 @@ func main() {
 
 	for i := 0; i < sessions; i++ {
 		p.Start()
-		<-p.timer.Done()
+		<-p.GetTimer().Done()
 
 		if i < sessions-1 {
 			p.NextSession()
-			<-p.timer.Done()
+			<-p.GetTimer().Done()
 		}
 	}
 
 	p.NextSession()
-	<-p.timer.Done()
+	<-p.GetTimer().Done()
 
 	fmt.Println("Pomodoro completed!")
 }

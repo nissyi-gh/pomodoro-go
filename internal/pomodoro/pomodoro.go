@@ -52,3 +52,7 @@ func (p *Pomodoro) NextSession() {
 	}
 	p.timer.Start()
 }
+
+func (p *Pomodoro) GetTimer() *timer.Timer {
+	return p.timer
+}
